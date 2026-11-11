@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo y Servicios | CaféPuntaCana</title>
+    <meta name="description" content="Explora nuestro menú de cafés de especialidad, bebidas frías y postres. Tabla de precios y detalles de preparación.">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>CaféPuntaCana</h1>
+        <button id="btn-modo-oscuro" aria-label="Alternar modo oscuro">🌙 Modo Oscuro</button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html" aria-current="page">Catálogo</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Sección 1: Catálogo Dinámico (JS) -->
+        <section id="catalogo">
+            <h2>Menú de Especialidades</h2>
+            <p>Explora nuestras opciones. Usa los filtros para encontrar tu bebida ideal:</p>
+            
+            <!-- Controles de filtrado para JavaScript -->
+            <div class="filtros-catalogo">
+                <input type="text" id="buscador" placeholder="Buscar servicio...">
+                <select id="filtro-categoria" aria-label="Filtrar por categoría">
+                    <option value="todas">Todas las categorías</option>
+                    <option value="caliente">Bebidas Calientes</option>
+                    <option value="frio">Bebidas Frías</option>
+                    <option value="postre">Postres</option>
+                </select>
+                <p id="contador-resultados">Cargando servicios...</p>
+            </div>
+
+            <!-- Aquí se inyectarán las tarjetas desde app.js -->
+            <div id="contenedor-tarjetas"></div>
+        </section>
+
+        <!-- Sección 2: Tabla de Datos -->
+        <section id="precios">
+            <h2>Tabla de Precios y Tamaños</h2>
+            <table>
+                <caption>Resumen de precios de nuestras bebidas más populares</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Bebida</th>
+                        <th scope="col">Tamaño</th>
+                        <th scope="col">Precio Base (DOP)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Espresso Sencillo</th>
+                        <td>Pequeño (1 oz)</td>
+                        <td rowspan="2">Consultar en tienda</td> <!-- Celda con rowspan -->
+                    </tr>
+                    <tr>
+                        <th scope="row">Espresso Doble</th>
+                        <td>Doble (2 oz)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Cappuccino Clásico</th>
+                        <td>Mediano (8 oz)</td>
+                        <td>$150.00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Latte Art</th>
+                        <td>Mediano (10 oz)</td>
+                        <td>$170.00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Cold Brew</th>
+                        <td>Grande (12 oz)</td>
+                        <td>$200.00</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Precios incluyen ITBIS. Sujetos a disponibilidad de temporada.</td> <!-- Celda con colspan -->
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <!-- Sección 3: Multimedia y Listas -->
+        <section id="experiencia">
+            <h2>Nuestra Experiencia</h2>
+            
+            <h3>El proceso paso a paso (en reversa)</h3>
+            <ol reversed>
+                <li>Degustas tu café perfecto.</li>
+                <li>Extraemos el espresso a 9 bares de presión.</li>
+                <li>Molemos el grano al instante.</li>
+                <li>Seleccionamos el mejor lote de la finca.</li>
+            </ol>
+
+            <h3>Equipos que utilizamos</h3>
+            <ul>
+                <li>Máquinas de Espresso
+                    <ul>
+                        <li>Automáticas industriales</li>
+                        <li>Semiautomáticas de precisión</li>
+                    </ul>
+                </li>
+                <li>Métodos de extracción manual (V60, Chemex, Aeropress)</li>
+            </ul>
+
+            <figure>
+                <img src="https://placehold.co/600x400/eeeeee/333333?text=Barista+Preparando+Cafe" alt="Barista vertiendo leche vaporizada para hacer latte art en una taza de cerámica negra">
+                <figcaption>Nuestro barista principal preparando un Latte Art con técnica de vertido libre.</figcaption>
+            </figure>
+
+            <div class="multimedia-wrapper">
+                <h3>Conoce nuestro ambiente</h3>
+                <!-- Audio con controles -->
+                <p>Escucha el sonido de nuestra cafetería:</p>
+                <audio controls>
+                    <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+                
+                <br><br>
+                
+                <!-- Iframe (Mapa ficticio/marcador en Punta Cana) -->
+                <p>Nuestra zona de influencia:</p>
+                <iframe title="Mapa de ubicación en Punta Cana" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121175.76014496222!2d-68.45524385!3d18.5818987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea8ead9634dfdf1%3A0x608b411ff2b56839!2sPunta%20Cana!5e0!3m2!1ses-419!2sdo!4v1680000000000!5m2!1ses-419!2sdo" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Sitio desarrollado por Josué David Paulino Martinez · Matrícula: <strong>[2023-3819]</strong></p>
+        <p>&copy; <span class="anio-actual">2026</span> CaféPuntaCana.</p>
+    </footer>
+
+</body>
+</html>
