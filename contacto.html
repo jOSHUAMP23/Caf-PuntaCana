@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | CaféPuntaCana</title>
+    <meta name="description" content="Ponte en contacto con CaféPuntaCana. Haz tu reserva o déjanos un mensaje.">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>CaféPuntaCana</h1>
+        <button id="btn-modo-oscuro" aria-label="Alternar modo oscuro">🌙 Modo Oscuro</button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Catálogo</a></li>
+                <li><a href="contacto.html" aria-current="page">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contacto">
+            <h2>Hablemos de Café</h2>
+            <p>Completa el formulario para realizar una reserva, un pedido especial o dejarnos tus comentarios.</p>
+            
+            <!-- Contenedor para el mensaje de éxito desde JavaScript -->
+            <div id="mensaje-exito" class="oculto" aria-live="polite"></div>
+
+            <!-- Formulario principal novalidate para que JS tome el control de los errores personalizados -->
+            <form id="form-contacto" novalidate>
+                
+                <!-- Fieldset 1: Datos Personales -->
+                <fieldset>
+                    <legend>Datos Personales</legend>
+                    
+                    <div class="grupo-form">
+                        <label for="nombre">Nombre completo (obligatorio):</label>
+                        <!-- Input tipo 1: text | Validación: required, minlength -->
+                        <input type="text" id="nombre" name="nombre" required minlength="3" aria-describedby="error-nombre">
+                        <span class="error" id="error-nombre"></span>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="correo">Correo electrónico (obligatorio):</label>
+                        <!-- Input tipo 2: email | Validación: required -->
+                        <input type="email" id="correo" name="correo" required aria-describedby="error-correo">
+                        <span class="error" id="error-correo"></span>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="telefono">Teléfono (obligatorio, 10 dígitos sin guiones):</label>
+                        <!-- Input tipo 3: tel | Validación: required, pattern -->
+                        <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10}" aria-describedby="error-telefono">
+                        <span class="error" id="error-telefono"></span>
+                    </div>
+                </fieldset>
+
+                <!-- Fieldset 2: Detalles de la Solicitud -->
+                <fieldset>
+                    <legend>Detalles de la Solicitud</legend>
+
+                    <div class="grupo-form">
+                        <label for="motivo">Motivo del contacto:</label>
+                        <select id="motivo" name="motivo" required aria-describedby="error-motivo">
+                            <option value="">-- Selecciona una opción --</option>
+                            <optgroup label="Visita al local">
+                                <option value="reserva">Reserva de mesa</option>
+                                <option value="evento">Evento privado</option>
+                            </optgroup>
+                            <optgroup label="Pedidos">
+                                <option value="delivery">Pedido a domicilio</option>
+                                <option value="granos">Compra de granos de café</option>
+                            </optgroup>
+                        </select>
+                        <span class="error" id="error-motivo"></span>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="fecha">Fecha de visita o entrega:</label>
+                        <!-- Input tipo 4: date | Validación: min -->
+                        <input type="date" id="fecha" name="fecha" required min="2026-11-10" aria-describedby="error-fecha">
+                        <span class="error" id="error-fecha"></span>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="personas">Número de personas (si aplica):</label>
+                        <!-- Input tipo 5: number | Validación: min, max -->
+                        <input type="number" id="personas" name="personas" min="1" max="20" aria-describedby="error-personas">
+                        <span class="error" id="error-personas"></span>
+                    </div>
+
+                    <div class="grupo-form">
+                        <p>Preferencia de contacto:</p>
+                        <!-- Input tipo 6: radio (grupo) -->
+                        <label>
+                            <input type="radio" name="pref_contacto" value="email" checked> Por correo
+                        </label>
+                        <label>
+                            <input type="radio" name="pref_contacto" value="whatsapp"> Por WhatsApp
+                        </label>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="mensaje">Comentarios o peticiones especiales:</label>
+                        <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+                    </div>
+
+                    <div class="grupo-form checkbox-container">
+                        <!-- Input tipo 7: checkbox -->
+                        <label for="terminos">
+                            <input type="checkbox" id="terminos" name="terminos" required aria-describedby="error-terminos">
+                            Acepto las políticas de privacidad y términos del servicio.
+                        </label>
+                        <span class="error" id="error-terminos"></span>
+                    </div>
+                </fieldset>
+
+                <!-- Botón submit -->
+                <button type="submit" id="btn-enviar">Enviar Mensaje</button>
+            </form>
+        </section>
+        
+        <!-- Enlaces solicitados adicionales -->
+        <section id="descargas">
+            <h2>Información Adicional</h2>
+            <p>Descarga nuestro <a href="docs/documentacion.pdf" download="Menu_CafePuntaCana.pdf">Menú completo en PDF</a> o visita el repositorio de nuestro proyecto en un <a href="https://github.com" target="_blank" rel="noopener">enlace externo</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <address>
+            Visítanos en: Plaza Blue Mall, Local 4, Punta Cana, República Dominicana.<br>
+            Llámanos: <a href="tel:+18095550000">(809)555-0000</a><br>
+            Escríbenos: <a href="mailto:hola@cafepuntacana.com">hola@cafepuntacana.com</a>
+        </address>
+        <p>Sitio desarrollado por Josué David Paulino Martinez · Matrícula: <strong>[2023-3819]</strong></p>
+        <p>&copy; <span class="anio-actual">2026</span> CaféPuntaCana.</p>
+    </footer>
+
+</body>
+</html>
