@@ -1,0 +1,388 @@
+/* ==========================================================================
+   1. Variables y Tema Oscuro (Mínimo 6 variables en :root)
+   ========================================================================== */
+:root {
+    --color-fondo: #fcf9f5;
+    --color-texto: #333333;
+    --color-primario: #5c3a21; /* Marrón café oscuro */
+    --color-secundario: #d4a373; /* Marrón claro / dorado */
+    --color-error: #d32f2f;
+    --color-tarjeta: #ffffff;
+    --fuente-principal: "Poppins", Arial, sans-serif;
+    --espaciado: 1.5rem;
+    --radio-borde: 8px;
+    --transicion: all 0.3s ease;
+}
+
+/* Tema oscuro cambiando SOLAMENTE las variables */
+body.oscuro {
+    --color-fondo: #1a1512;
+    --color-texto: #f5f5f5;
+    --color-primario: #d4a373;
+    --color-secundario: #5c3a21;
+    --color-tarjeta: #2d241f;
+    --color-error: #ff6b6b;
+}
+
+/* ==========================================================================
+   2. Base, Reseteo y Modelo de Caja
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box; /* Requisito: box-sizing universal */
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    margin: 0;
+    padding: 0;
+    /* Footer siempre abajo (Flexbox) */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Evitar desbordamiento de multimedia */
+img, iframe, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radio-borde);
+}
+
+/* ==========================================================================
+   3. Layout (Grid y Flexbox)
+   ========================================================================== */
+/* Header con Flexbox */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem 2vw;
+    background-color: var(--color-primario);
+    color: var(--color-fondo);
+    gap: 1rem;
+}
+
+/* Uso máximo de 2 selectores de ID (#btn-modo-oscuro y #btn-hamburguesa) */
+#btn-modo-oscuro {
+    background-color: var(--color-secundario);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radio-borde);
+    cursor: pointer;
+    font-weight: bold;
+    transition: var(--transicion);
+}
+
+#btn-modo-oscuro:hover {
+    transform: scale(1.05);
+}
+
+/* Navegación con Flexbox */
+nav ul {
+    display: flex;
+    gap: var(--espaciado);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    color: var(--color-fondo);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem;
+    transition: var(--transicion);
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+    color: var(--color-secundario);
+    border-bottom: 2px solid var(--color-secundario);
+}
+
+/* Main estructurado para crecer y empujar el footer */
+main {
+    flex: 1;
+    padding: var(--espaciado) 2vw;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Footer siempre al fondo */
+footer {
+    background-color: var(--color-primario);
+    color: var(--color-fondo);
+    text-align: center;
+    padding: 2rem;
+    margin-top: auto;
+}
+
+footer a {
+    color: var(--color-secundario);
+}
+
+/* Layout de la Portada a dos columnas (Flexbox) */
+@media (min-width: 769px) {
+    main {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+    
+    /* Selector de atributo para las secciones de portada */
+    section[id="nosotros"], 
+    section[id="novedades"] {
+        flex: 1 1 60%;
+    }
+    
+    aside {
+        flex: 1 1 30%;
+        background-color: var(--color-tarjeta);
+        padding: 1.5rem;
+        border-radius: var(--radio-borde);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    /* Las demás secciones (Catálogo y Contacto) a pantalla completa */
+    section[id="catalogo"], section[id="precios"], section[id="experiencia"], 
+    section[id="contacto"], section[id="descargas"] {
+        flex: 1 1 100%;
+    }
+}
+
+/* ==========================================================================
+   4. Componentes (Tarjetas con Grid, Tabla y Formulario)
+   ========================================================================== */
+
+/* Catálogo dinámico con CSS Grid */
+.contenedor-tarjetas {
+    display: grid;
+    /* Tarjetas adaptables: mínimo 250px, máximo 1 fracción */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--espaciado);
+    margin-top: var(--espaciado);
+}
+
+/* Tarjeta (se inyectarán por JS, pero definimos su estilo aquí) */
+.tarjeta {
+    background-color: var(--color-tarjeta);
+    border-radius: var(--radio-borde);
+    padding: var(--espaciado);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: var(--transicion); /* Transición 1 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Pseudoclase :hover */
+.tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.tarjeta-precio {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--color-secundario);
+    margin-top: auto;
+}
+
+/* Tabla adaptable */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    display: block; /* Para scroll en móvil */
+    overflow-x: auto; /* Scroll horizontal si no cabe */
+    white-space: nowrap;
+}
+
+caption {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--color-primario);
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+th, td {
+    padding: 1rem;
+    border: 1px solid var(--color-secundario);
+    text-align: left;
+}
+
+/* Filas alternas y Selector descendente */
+tbody tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.05);
+}
+
+body.oscuro tbody tr:nth-child(even) {
+    background-color: rgba(255,255,255,0.05);
+}
+
+/* Formulario */
+fieldset {
+    border: 2px solid var(--color-secundario);
+    border-radius: var(--radio-borde);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+legend {
+    font-weight: bold;
+    color: var(--color-primario);
+    padding: 0 0.5rem;
+}
+
+.grupo-form {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-container {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Selector de atributo para inputs */
+input[type="text"], input[type="email"], input[type="tel"], 
+input[type="date"], input[type="number"], select, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    background-color: var(--color-tarjeta);
+    color: var(--color-texto);
+    transition: var(--transicion); /* Transición 2 */
+}
+
+/* Pseudoclase de accesibilidad visual */
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: none;
+    border-color: var(--color-secundario);
+    box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.3);
+}
+
+button[type="submit"] {
+    background-color: var(--color-primario);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--radio-borde);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transicion);
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--color-secundario);
+}
+
+/* ==========================================================================
+   5. Estados de Error (Para JavaScript) y Utilidades
+   ========================================================================== */
+.error {
+    color: var(--color-error);
+    font-size: 0.85rem;
+    min-height: 1.2em;
+    display: block;
+    margin-top: 0.25rem;
+    font-weight: bold;
+}
+
+.invalido {
+    border-color: var(--color-error) !important;
+    background-color: rgba(211, 47, 47, 0.05) !important;
+}
+
+.oculto {
+    display: none !important;
+}
+
+#mensaje-exito {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 1rem;
+    border-radius: var(--radio-borde);
+    margin-bottom: 1rem;
+    border: 1px solid #c3e6cb;
+}
+
+/* ==========================================================================
+   6. Diseño Adaptable (Media Queries)
+   ========================================================================== */
+
+/* Botón hamburguesa (oculto en escritorio) */
+#btn-hamburguesa {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-fondo);
+}
+
+/* Primera Media Query: Tablets y Móviles (≤ 768px) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: row;
+        position: relative;
+    }
+    
+    #btn-hamburguesa {
+        display: block; /* Mostramos la hamburguesa en móvil */
+        order: 2;
+    }
+
+    #btn-modo-oscuro {
+        order: 1;
+    }
+    
+    nav {
+        width: 100%;
+        order: 3;
+    }
+
+    nav ul {
+        display: none; /* Oculto por defecto en móvil */
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: var(--color-primario);
+        padding: 1rem 0;
+    }
+
+    /* Clase que añadirá JavaScript para abrir el menú */
+    nav ul.activo {
+        display: flex;
+    }
+
+    aside {
+        margin-top: 2rem;
+    }
+}
+
+/* Segunda Media Query: Teléfonos Pequeños (≤ 480px) */
+@media (max-width: 480px) {
+    :root {
+        --espaciado: 1rem;
+    }
+    body {
+        font-size: 15px;
+    }
+    .contenedor-tarjetas {
+        grid-template-columns: 1fr; /* 1 sola columna obligatoria en móvil pequeño */
+    }
+}
